@@ -20,11 +20,6 @@ const questions = [
   },
   {
     type: "Input",
-    message: "What's in the table of contents??",
-    name: "ToC",
-  },
-  {
-    type: "Input",
     message: "What do you need to install?",
     name: "Install",
   },
@@ -34,14 +29,15 @@ const questions = [
     name: "Usage",
   },
   {
-    type: "Input",
-    message: "What's the licensing of your project?",
+    type: "checkbox",
+    message: "What license are you using?",
     name: "License",
+    choices: ["MIT", "GPLv3", "The Unlicense"],
   },
   {
     type: "Input",
     message: "Who's contributing to your project?",
-    name: "Contribute",
+    name: "Credit",
   },
   {
     type: "Input",
