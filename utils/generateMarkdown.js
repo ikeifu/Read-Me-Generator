@@ -1,5 +1,5 @@
 // function to generate markdown for README
-function generateMarkdown(data) {
+function generateMarkdown(data, userInfo) {
   return `## ${data.Title}
   
  
@@ -34,6 +34,8 @@ function generateMarkdown(data) {
 
   ${data.Question}    
   
+  ![Developer Profile Picture](${userInfo.avatar_url}) 
+
    You can contact me [@${data.Email}](https://${data.Email})  
 
 
@@ -47,7 +49,7 @@ function generateMarkdown(data) {
 
   ${data.License}
 
-  [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+  ![Badge for GitHub](https://img.shields.io/github/languages/top/${data.Username}/${data.Repository}?style=flat&logo=appveyor) 
 `;
 }
 
