@@ -1,7 +1,11 @@
 const fs = require("fs");
 const util = require("util");
 const inquirer = require("inquirer");
-// const writeFileAsync =
+
+const api = require("./utils/api.js");
+const generateMarkdown = require("./utils/generateMarkdown.js");
+
+const writeFileAsync = util.promisify(writeToFile);
 // array of questions for user
 const questions = [
   {
@@ -64,20 +68,38 @@ const questions = [
 
 // function to write README file
 function writeToFile(fileName, data) {
-  fs.writeFile(fileName, data, function (err) {
+  fs.writeFile(fileName, data, (err) => {
     if (err) {
-      return console.log(err);
+      return console.log("error");
     }
-    console.log("Success");
+    return console.log("Done");
   });
 }
 
 // function to initialize program
-function init() {
-  inquirer.prompt(questions).then(function (data) {
-    writeToFile("readme.txt", data);
-    console.log("works");
-  });
+async function init() {
+  try {
+    // Reference inquirer array with prompts
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
+    // https://www.digitalocean.com/community/tutorials/nodejs-interactive-command-line-prompts
+    const userResponses = await inquirer.prompt(questions);
+    console.log("Your responses: ", userResponses);
+    console.log("Your responses have been logged. Calling to GitHub...");
+
+    // Referencing API.js
+    const userInfo = await api.getUser(userResponses);
+    console.log("Your GitHub user info: ", userInfo);
+
+    // Pass inquirer data and api data to markdown
+    console.log("Generating your markdown");
+    const markdown = generateMarkdown(userResponses, userInfo);
+    console.log(markdown);
+
+    // Write markdown
+    await writeFileAsync("ExampleREADME.md", markdown);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 // function call to initialize program
