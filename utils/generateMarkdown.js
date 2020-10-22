@@ -32,7 +32,12 @@ function generateMarkdown(data) {
 
   ## Questions
 
-  ${data.Question}
+  ${data.Question}    
+  
+   You can contact me [@${data.Email}](https://${data.Email})  
+
+
+  [@${data.Username}](https://github.com/${data.Username})
 
   ## Credit
 
@@ -40,7 +45,9 @@ function generateMarkdown(data) {
 
   ## License
 
-  ${data.license}
+  ${data.License}
+
+  [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
 `;
 }
 

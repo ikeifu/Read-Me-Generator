@@ -29,12 +29,6 @@ const questions = [
     name: "Usage",
   },
   {
-    type: "checkbox",
-    message: "What license are you using?",
-    name: "License",
-    choices: ["MIT", "GPLv3", "The Unlicense"],
-  },
-  {
     type: "Input",
     message: "Who's contributing to your project?",
     name: "Credit",
@@ -59,6 +53,12 @@ const questions = [
     message: "What's your Email?",
     name: "Email",
   },
+  {
+    type: "checkbox",
+    message: "What license are you using?",
+    name: "License",
+    choices: ["MIT", " GPLv3", " The Unlicense"],
+  },
 ];
 
 // function to write README file
@@ -74,17 +74,10 @@ function writeToFile(fileName, data) {
 // function to initialize program
 async function init() {
   try {
-    // Reference inquirer array with prompts
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
-    // https://www.digitalocean.com/community/tutorials/nodejs-interactive-command-line-prompts
     const userResponses = await inquirer.prompt(questions);
-    console.log("Your responses: ", userResponses);
-    console.log("Your responses have been logged. Calling to GitHub...");
     // Referencing API.js
     const userInfo = await api.getUser(userResponses);
-    console.log("Your GitHub user info: ", userInfo);
 
-    console.log("Generating your markdown");
     const markdown = generateMarkdown(userResponses, userInfo);
 
     await writeFileAsync("TEST.md", markdown);
