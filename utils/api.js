@@ -7,7 +7,7 @@ const api = {
       let response = await axios
 
         // For reference: https://api.github.com/users/jordanwhunter
-        .get(`https://api.github.com/users/${userResponses.username}`);
+        .get(`https://api.github.com/users/${userResponses.Username}`);
       return response.data;
     } catch (error) {
       console.log(error);
